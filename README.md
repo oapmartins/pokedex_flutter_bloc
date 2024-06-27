@@ -2,6 +2,12 @@
 
 A new Flutter project.
 
+Figma:
+https://www.figma.com/design/9Gm6Q8GPKa4LPAnFBfKueq/HackersGen-'22---Pokedex-App-Course---UI?node-id=13-285&t=TAVmYadUw84Uue2u-0
+
+Api:
+https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
