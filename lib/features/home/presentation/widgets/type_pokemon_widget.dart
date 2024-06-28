@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class TypeWidget extends StatelessWidget {
-  const TypeWidget({
+class TypePokemonWidget extends StatelessWidget {
+  const TypePokemonWidget({
     super.key,
     required this.listTypePokemon,
     required this.typePokemon,
