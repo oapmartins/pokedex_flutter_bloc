@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_event.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_state.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_bloc/features/home/data/repositories/home_repository_impl.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -15,10 +15,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RedoListPokemonsEvent>(_redoListPokemonsEvent);
   }
 
-  List<PokemonModel> _listPokemon = [];
+  List<PokemonEntity> _listPokemon = [];
 
   void _getPokemonsEvent(GetPokemonsEvent homeEvent, Emitter emit) async {
-    List<PokemonModel> pokemons = [];
+    List<PokemonEntity> pokemons = [];
     try {
       emit(HomeLoadingState());
       await Future.delayed(const Duration(seconds: 2));
@@ -33,8 +33,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _searchListPokemonEvent(SearchListPokemonEvent homeEvent, Emitter emit) {
     try {
-      List<PokemonModel> filterPokemons = _listPokemon
-          .where((PokemonModel pokemon) => (pokemon.name ?? '').toLowerCase().contains(
+      List<PokemonEntity> filterPokemons = _listPokemon
+          .where((PokemonEntity pokemon) => (pokemon.name ?? '').toLowerCase().contains(
                 homeEvent.word.toLowerCase(),
               ))
           .toList();

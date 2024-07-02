@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter_bloc/core/utils/constants/color_constants.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
+import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/widgets/type_pokemon_widget.dart';
 
 class CardPokemonWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class CardPokemonWidget extends StatelessWidget {
     required this.indexPokemon,
   });
 
-  final PokemonModel pokemon;
+  final PokemonEntity pokemon;
   final int indexPokemon;
 
   @override

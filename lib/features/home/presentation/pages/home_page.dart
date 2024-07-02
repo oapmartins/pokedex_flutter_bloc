@@ -153,9 +153,9 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                   const SizedBox(height: 12),
-                                  SingleChildScrollView(
+                                  const SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    child: const Row(
+                                    child: Row(
                                       children: [
                                         CustomFilterChipWidget(nameFilter: 'Generation I'),
                                         SizedBox(width: 12),

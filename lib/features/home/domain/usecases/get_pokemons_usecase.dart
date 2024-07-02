@@ -2,10 +2,10 @@ import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entit
 import 'package:pokedex_flutter_bloc/features/home/domain/repositories/pokemon_repository.dart';
 
 class GetPokemonsUsecase {
-  GetPokemonsUsecase(this.pokemonRepository);
-  final PokemonRepository pokemonRepository;
+  final PokemonRepository _pokemonRepository;
+  GetPokemonsUsecase(this._pokemonRepository);
 
   Future<List<PokemonEntity>> call() async {
-    return await pokemonRepository.getPokemons();
+    return await _pokemonRepository.getPokemons();
   }
 }

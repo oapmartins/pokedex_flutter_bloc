@@ -1,4 +1,4 @@
-import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
+import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
 
 abstract class HomeState {}
 
@@ -9,6 +9,6 @@ class HomeLoadingState extends HomeState {}
 class HomeErrorState extends HomeState {}
 
 class HomeLoadedState extends HomeState {
-  final List<PokemonModel> pokemons;
+  final List<PokemonEntity> pokemons;
   HomeLoadedState({required this.pokemons});
 }

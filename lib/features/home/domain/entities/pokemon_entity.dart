@@ -1,8 +1,6 @@
-import 'package:pokedex_flutter_bloc/features/home/domain/entities/next_evolution_entity.dart';
-
 class PokemonEntity {
   int? id;
-  String? num;
+  String? number;
   String? name;
   String? img;
   List<String>? type;
@@ -16,11 +14,10 @@ class PokemonEntity {
   String? spawnTime;
   List<dynamic>? multipliers;
   List<String>? weaknesses;
-  List<NextEvolutionEntity>? nextEvolution;
 
   PokemonEntity({
     this.id,
-    this.num,
+    this.number,
     this.name,
     this.img,
     this.type,
@@ -34,6 +31,5 @@ class PokemonEntity {
     this.spawnTime,
     this.multipliers,
     this.weaknesses,
-    this.nextEvolution,
   });
 }
