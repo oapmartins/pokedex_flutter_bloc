@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/data_source/abstract_home_api.dart';
 
-class HomeApiImpl implements AbstractHomeApi {
+abstract class PokemonRemoteDataSource {
+  Future<String> getPokemons();
+}
+
+class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
   final Dio dio;
 
-  HomeApiImpl(this.dio);
+  PokemonRemoteDataSourceImpl(this.dio);
 
   @override
   Future<String> getPokemons() async {
@@ -13,6 +16,7 @@ class HomeApiImpl implements AbstractHomeApi {
         'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json',
       );
       return response.data.toString();
+      
     } catch (e) {
       return e.toString();
     }

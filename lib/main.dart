@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/data_source/home_api_impl.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/datasources/pokemons_remote_datasource.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_bloc.dart';
 import 'package:pokedex_flutter_bloc/features/home/data/repositories/home_repository_impl.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/pages/home_page.dart';
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => BlocProvider(
               create: (_) => HomeBloc(
-                HomeRepositoryImpl(
-                  HomeApiImpl(
+                PokemonRepositoryImpl(
+                  PokemonRemoteDataSourceImpl(
                     Dio(),
                   ),
                 ),

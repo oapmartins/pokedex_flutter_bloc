@@ -1,15 +1,15 @@
 import 'dart:convert';
 
-import 'package:pokedex_flutter_bloc/features/home/domain/models/pokemon_model.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/data_source/home_api_impl.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/datasources/pokemons_remote_datasource.dart';
 
-class HomeRepositoryImpl {
-  final HomeApiImpl homeApiImpl;
-  HomeRepositoryImpl(this.homeApiImpl);
+class PokemonRepositoryImpl {
+  final PokemonRemoteDataSourceImpl pokemonRemoteDataSourceImpl;
+  PokemonRepositoryImpl(this.pokemonRemoteDataSourceImpl);
 
   Future<List<PokemonModel>> getPokemons() async {
     List<PokemonModel> pokemons = [];
-    final response = await homeApiImpl.getPokemons();
+    final response = await pokemonRemoteDataSourceImpl.getPokemons();
 
     for (final pokemonJson in jsonDecode(response)['pokemon']) {
       pokemons.add(PokemonModel.fromJson(pokemonJson));

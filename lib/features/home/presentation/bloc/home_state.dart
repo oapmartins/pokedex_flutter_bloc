@@ -1,4 +1,4 @@
-import 'package:pokedex_flutter_bloc/features/home/domain/models/pokemon_model.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
 
 abstract class HomeState {}
 

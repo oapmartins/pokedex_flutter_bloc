@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_event.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_state.dart';
-import 'package:pokedex_flutter_bloc/features/home/domain/models/pokemon_model.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/models/pokemon_model.dart';
 import 'package:pokedex_flutter_bloc/features/home/data/repositories/home_repository_impl.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final HomeRepositoryImpl homeRepositoryImpl;
+  final PokemonRepositoryImpl pokemonRepositoryImpl;
 
-  HomeBloc(this.homeRepositoryImpl) : super(HomeInitialState()) {
+  HomeBloc(this.pokemonRepositoryImpl) : super(HomeInitialState()) {
     on<GetPokemonsEvent>(_getPokemonsEvent);
     on<SearchListPokemonEvent>(_searchListPokemonEvent);
 
@@ -23,7 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeLoadingState());
       await Future.delayed(const Duration(seconds: 2));
 
-      pokemons = await homeRepositoryImpl.getPokemons();
+      pokemons = await pokemonRepositoryImpl.getPokemons();
       _listPokemon = [...pokemons];
       emit(HomeLoadedState(pokemons: pokemons));
     } catch (e) {

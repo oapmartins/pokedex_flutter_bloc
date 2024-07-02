@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter_bloc/constants/color_constants.dart';
+import 'package:pokedex_flutter_bloc/core/utils/constants/color_constants.dart';
 
 class CustomFilterChipWidget extends StatelessWidget {
   const CustomFilterChipWidget({

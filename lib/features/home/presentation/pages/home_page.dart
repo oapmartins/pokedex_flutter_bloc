@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_bloc.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_event.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_state.dart';
-import 'package:pokedex_flutter_bloc/constants/color_constants.dart';
+import 'package:pokedex_flutter_bloc/core/utils/constants/color_constants.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/widgets/card_pokemon_widget.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/widgets/filter/custom_filter_chip_widget.dart';
 
