@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_event.dart';
 import 'package:pokedex_flutter_bloc/features/home/presentation/bloc/home_state.dart';
-import 'package:pokedex_flutter_bloc/features/home/data/repositories/home_repository_impl.dart';
+import 'package:pokedex_flutter_bloc/features/home/data/repositories/pokemon_repository_impl.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final PokemonRepositoryImpl pokemonRepositoryImpl;

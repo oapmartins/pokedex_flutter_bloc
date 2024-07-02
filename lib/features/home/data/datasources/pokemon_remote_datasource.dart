@@ -23,9 +23,21 @@ class PokemonRemoteDataSourceImpl implements PokemonRemoteDataSource {
       for (final pokemonJson in jsonDecode(retornoApi)['pokemon']) {
         pokemons.add(PokemonModel.fromJson(pokemonJson));
       }
-      return pokemons;
-    } catch (e) {
-      return [];
+    } on DioException catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print(e.response?.data);
+        print(e.response?.headers);
+        print(e.response?.requestOptions);
+
+        //  API responds with 404 when reached the end
+        if (e.response?.statusCode == 404) return [];
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e);
+      }
     }
+    return pokemons;
   }
 }
