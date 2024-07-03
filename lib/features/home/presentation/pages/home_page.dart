@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _homeBloc = BlocProvider.of<HomeBloc>(context);
-    _homeBloc.add(GetPokemonsEvent());
+    _homeBloc.add(FetchPokemonsEvent(page: 0));
     super.initState();
   }
 
@@ -109,71 +109,72 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        showModalBottomSheet<void>(
-                          backgroundColor: Colors.white,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(vertical: 16),
-                                        child: Container(
-                                          width: 45,
-                                          height: 5,
-                                          decoration: BoxDecoration(
-                                            color: ColorConstants.gray400,
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Text(
-                                    'Filters',
-                                    style: TextStyle(
-                                      color: ColorConstants.gray500,
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  const Text(
-                                    'Generations',
-                                    style: TextStyle(
-                                      color: ColorConstants.gray500,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  const SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        CustomFilterChipWidget(nameFilter: 'Generation I'),
-                                        SizedBox(width: 12),
-                                        CustomFilterChipWidget(nameFilter: 'Generation II'),
-                                        SizedBox(width: 12),
-                                        CustomFilterChipWidget(nameFilter: 'Generation III'),
-                                        SizedBox(width: 12),
-                                        CustomFilterChipWidget(nameFilter: 'Generation VI'),
-                                        SizedBox(width: 12),
-                                        CustomFilterChipWidget(nameFilter: 'Generation V'),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            );
-                          },
-                        );
+                        _homeBloc.add(FetchPokemonsEvent(page: 0));
+                        // showModalBottomSheet<void>(
+                        //   backgroundColor: Colors.white,
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return Padding(
+                        //       padding: const EdgeInsets.symmetric(horizontal: 24),
+                        //       child: Column(
+                        //         mainAxisSize: MainAxisSize.min,
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: [
+                        //           Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             children: [
+                        //               Padding(
+                        //                 padding: const EdgeInsets.symmetric(vertical: 16),
+                        //                 child: Container(
+                        //                   width: 45,
+                        //                   height: 5,
+                        //                   decoration: BoxDecoration(
+                        //                     color: ColorConstants.gray400,
+                        //                     borderRadius: BorderRadius.circular(10),
+                        //                   ),
+                        //                 ),
+                        //               ),
+                        //             ],
+                        //           ),
+                        //           const Text(
+                        //             'Filters',
+                        //             style: TextStyle(
+                        //               color: ColorConstants.gray500,
+                        //               fontSize: 22,
+                        //               fontWeight: FontWeight.w500,
+                        //             ),
+                        //           ),
+                        //           const SizedBox(height: 24),
+                        //           const Text(
+                        //             'Generations',
+                        //             style: TextStyle(
+                        //               color: ColorConstants.gray500,
+                        //               fontSize: 14,
+                        //               fontWeight: FontWeight.w500,
+                        //             ),
+                        //           ),
+                        //           const SizedBox(height: 12),
+                        //           const SingleChildScrollView(
+                        //             scrollDirection: Axis.horizontal,
+                        //             child: Row(
+                        //               children: [
+                        //                 CustomFilterChipWidget(nameFilter: 'Generation I'),
+                        //                 SizedBox(width: 12),
+                        //                 CustomFilterChipWidget(nameFilter: 'Generation II'),
+                        //                 SizedBox(width: 12),
+                        //                 CustomFilterChipWidget(nameFilter: 'Generation III'),
+                        //                 SizedBox(width: 12),
+                        //                 CustomFilterChipWidget(nameFilter: 'Generation VI'),
+                        //                 SizedBox(width: 12),
+                        //                 CustomFilterChipWidget(nameFilter: 'Generation V'),
+                        //               ],
+                        //             ),
+                        //           )
+                        //         ],
+                        //       ),
+                        //     );
+                        //   },
+                        // );
                       },
                       child: Container(
                         width: 48,
@@ -197,10 +198,20 @@ class _HomePageState extends State<HomePage> {
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   if (state is HomeLoadingState) {
-                    return const SliverToBoxAdapter(child: Center(child: CircularProgressIndicator()));
+                    return const SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Center(child: CircularProgressIndicator()),
+                    );
                   } else if (state is HomeErrorState) {
                     return const SliverToBoxAdapter(child: SizedBox(height: 0));
                   } else if (state is HomeLoadedState) {
+                    if (state.pokemons.isEmpty) {
+                      return const SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Center(child: Text('No data found')),
+                      );
+                    }
+
                     return SliverGrid.builder(
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         mainAxisExtent: 100,

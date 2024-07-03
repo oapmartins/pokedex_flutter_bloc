@@ -1,5 +1,5 @@
-import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
+import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon.dart';
 
 abstract class PokemonRepository {
-  Future<List<PokemonEntity>> getPokemons();
+  Future<List<Pokemon>> fetchPokemonsPaginate({required int page});
 }

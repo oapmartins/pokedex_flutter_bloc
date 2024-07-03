@@ -1,59 +1,85 @@
-import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon_entity.dart';
+import 'package:pokedex_flutter_bloc/features/home/domain/entities/pokemon.dart';
 
-class PokemonModel extends PokemonEntity {
-  PokemonModel({
+class PokemonModel extends Pokemon {
+  PokemonModel(
     super.id,
-    super.number,
-    super.name,
-    super.img,
-    super.type,
     super.height,
+    super.name,
+    super.stats,
+    super.types,
     super.weight,
-    super.candy,
-    super.candyCount,
-    super.egg,
-    super.spawnChance,
-    super.avgSpawns,
-    super.spawnTime,
-    super.multipliers,
-    super.weaknesses,
+  );
+
+  factory PokemonModel.fromMap(Map<String, dynamic> map) {
+    return PokemonModel(
+      map['id'],
+      map['height'],
+      map['name'],
+      List<Stats>.from(map['stats']?.map((x) => StatsModel.fromMap(x))),
+      List<String>.from(map['types']?.map((x) {
+        return "${TypesModel.fromMap(x).types[0].toUpperCase()}${TypesModel.fromMap(x).types.toLowerCase().substring(1)}";
+        // return TypesModel.fromMap(x).types.toString().to;
+      })),
+      map['weight'],
+    );
+  }
+}
+
+class StatsModel extends Stats {
+  StatsModel({
+    super.stat,
+    super.name,
   });
 
-  PokemonModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    number = json['num'];
-    name = json['name'];
-    img = json['img'];
-    type = json['type']?.cast<String>();
-    height = json['height'];
-    weight = json['weight'];
-    candy = json['candy'];
-    candyCount = json['candy_count'];
-    egg = json['egg'];
-    spawnChance = json['spawn_chance'];
-    avgSpawns = json['avg_spawns'];
-    spawnTime = json['spawn_time'];
-    multipliers = json['multipliers'];
-    weaknesses = json['weaknesses']?.cast<String>();
+  StatsModel copyWith({
+    int? stat,
+    String? name,
+  }) {
+    return StatsModel(
+      stat: stat ?? this.stat,
+      name: name ?? this.name,
+    );
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['num'] = num;
-    data['name'] = name;
-    data['img'] = img;
-    data['type'] = type;
-    data['height'] = height;
-    data['weight'] = weight;
-    data['candy'] = candy;
-    data['candy_count'] = candyCount;
-    data['egg'] = egg;
-    data['spawn_chance'] = spawnChance;
-    data['avg_spawns'] = avgSpawns;
-    data['spawn_time'] = spawnTime;
-    data['multipliers'] = multipliers;
-    data['weaknesses'] = weaknesses;
-    return data;
+  factory StatsModel.fromMap(Map<String, dynamic> map) {
+    int stat = map['base_stat'];
+    String name = map['stat']['name'];
+    if (name == "hp") {
+      return StatsModel(stat: stat, name: "HP ");
+    } else if (name == "attack") {
+      return StatsModel(stat: stat, name: "ATK");
+    } else if (name == "defense") {
+      return StatsModel(stat: stat, name: "DEF");
+    } else if (name == "special-attack") {
+      return StatsModel(stat: stat, name: "STK");
+    } else if (name == "special-defense") {
+      return StatsModel(stat: stat, name: "SEF");
+    } else if (name == "speed") {
+      return StatsModel(stat: stat, name: "SPD");
+    } else {
+      return StatsModel(stat: stat, name: name);
+    }
+  }
+}
+
+class TypesModel {
+  TypesModel({
+    required this.types,
+  });
+
+  final String types;
+
+  TypesModel copyWith({
+    String? types,
+  }) {
+    return TypesModel(
+      types: types ?? this.types,
+    );
+  }
+
+  factory TypesModel.fromMap(Map<String, dynamic> map) {
+    return TypesModel(
+      types: map['type']['name'],
+    );
   }
 }
