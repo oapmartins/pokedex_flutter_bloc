@@ -109,72 +109,71 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(width: 8),
                     GestureDetector(
                       onTap: () {
-                        _homeBloc.add(FetchPokemonsEvent(page: 0));
-                        // showModalBottomSheet<void>(
-                        //   backgroundColor: Colors.white,
-                        //   context: context,
-                        //   builder: (BuildContext context) {
-                        //     return Padding(
-                        //       padding: const EdgeInsets.symmetric(horizontal: 24),
-                        //       child: Column(
-                        //         mainAxisSize: MainAxisSize.min,
-                        //         crossAxisAlignment: CrossAxisAlignment.start,
-                        //         children: [
-                        //           Row(
-                        //             mainAxisAlignment: MainAxisAlignment.center,
-                        //             children: [
-                        //               Padding(
-                        //                 padding: const EdgeInsets.symmetric(vertical: 16),
-                        //                 child: Container(
-                        //                   width: 45,
-                        //                   height: 5,
-                        //                   decoration: BoxDecoration(
-                        //                     color: ColorConstants.gray400,
-                        //                     borderRadius: BorderRadius.circular(10),
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //             ],
-                        //           ),
-                        //           const Text(
-                        //             'Filters',
-                        //             style: TextStyle(
-                        //               color: ColorConstants.gray500,
-                        //               fontSize: 22,
-                        //               fontWeight: FontWeight.w500,
-                        //             ),
-                        //           ),
-                        //           const SizedBox(height: 24),
-                        //           const Text(
-                        //             'Generations',
-                        //             style: TextStyle(
-                        //               color: ColorConstants.gray500,
-                        //               fontSize: 14,
-                        //               fontWeight: FontWeight.w500,
-                        //             ),
-                        //           ),
-                        //           const SizedBox(height: 12),
-                        //           const SingleChildScrollView(
-                        //             scrollDirection: Axis.horizontal,
-                        //             child: Row(
-                        //               children: [
-                        //                 CustomFilterChipWidget(nameFilter: 'Generation I'),
-                        //                 SizedBox(width: 12),
-                        //                 CustomFilterChipWidget(nameFilter: 'Generation II'),
-                        //                 SizedBox(width: 12),
-                        //                 CustomFilterChipWidget(nameFilter: 'Generation III'),
-                        //                 SizedBox(width: 12),
-                        //                 CustomFilterChipWidget(nameFilter: 'Generation VI'),
-                        //                 SizedBox(width: 12),
-                        //                 CustomFilterChipWidget(nameFilter: 'Generation V'),
-                        //               ],
-                        //             ),
-                        //           )
-                        //         ],
-                        //       ),
-                        //     );
-                        //   },
-                        // );
+                        showModalBottomSheet<void>(
+                          backgroundColor: Colors.white,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 16),
+                                        child: Container(
+                                          width: 45,
+                                          height: 5,
+                                          decoration: BoxDecoration(
+                                            color: ColorConstants.gray400,
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text(
+                                    'Filters',
+                                    style: TextStyle(
+                                      color: ColorConstants.gray500,
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  const Text(
+                                    'Generations',
+                                    style: TextStyle(
+                                      color: ColorConstants.gray500,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  const SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        CustomFilterChipWidget(nameFilter: 'Generation I'),
+                                        SizedBox(width: 12),
+                                        CustomFilterChipWidget(nameFilter: 'Generation II'),
+                                        SizedBox(width: 12),
+                                        CustomFilterChipWidget(nameFilter: 'Generation III'),
+                                        SizedBox(width: 12),
+                                        CustomFilterChipWidget(nameFilter: 'Generation VI'),
+                                        SizedBox(width: 12),
+                                        CustomFilterChipWidget(nameFilter: 'Generation V'),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        );
                       },
                       child: Container(
                         width: 48,
