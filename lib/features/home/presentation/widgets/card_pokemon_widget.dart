@@ -39,10 +39,13 @@ class CardPokemonWidget extends StatelessWidget {
             Positioned(
               top: 25,
               left: 90,
-              child: Image.asset(
-                'assets/images/pokeball.png',
-                color: Colors.white.withOpacity(.2),
-                width: 100,
+              child: Hero(
+                tag: pokemon.name ?? '',
+                child: Image.asset(
+                  'assets/images/pokeball.png',
+                  color: Colors.white.withOpacity(.2),
+                  width: 100,
+                ),
               ),
             ),
             Padding(

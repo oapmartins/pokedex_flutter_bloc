@@ -14,14 +14,17 @@ class PokemonModel extends Pokemon {
     return PokemonModel(
       map['id'],
       map['height'],
-      map['name'],
+      firstLetterToUpperCase(map['name']),
       List<Stats>.from(map['stats']?.map((x) => StatsModel.fromMap(x))),
       List<String>.from(map['types']?.map((x) {
-        return "${TypesModel.fromMap(x).types[0].toUpperCase()}${TypesModel.fromMap(x).types.toLowerCase().substring(1)}";
-        // return TypesModel.fromMap(x).types.toString().to;
+        return firstLetterToUpperCase(TypesModel.fromMap(x).types);
       })),
       map['weight'],
     );
+  }
+
+  static firstLetterToUpperCase(String word) {
+    return "${word[0].toUpperCase()}${word.toLowerCase().substring(1)}";
   }
 }
 
